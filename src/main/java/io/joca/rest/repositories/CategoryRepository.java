@@ -4,5 +4,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import io.joca.rest.domain.Category;
 
+/**
+ * 
+ * @author Joao Berardo
+ * @since Feb. 18, 2019
+ *
+ */
 public interface CategoryRepository extends JpaRepository<Category, Long> {
+	Category findByName(String name);
 }

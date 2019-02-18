@@ -4,6 +4,7 @@ import io.joca.rest.api.v1.model.CategoryDTO;
 import io.joca.rest.domain.Category;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 /**

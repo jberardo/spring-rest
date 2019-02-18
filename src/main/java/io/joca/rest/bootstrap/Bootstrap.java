@@ -6,6 +6,12 @@ import org.springframework.stereotype.Component;
 import io.joca.rest.domain.Category;
 import io.joca.rest.repositories.CategoryRepository;
 
+/**
+ * 
+ * @author Joao Berardo
+ * @since Feb. 18, 2019
+ *
+ */
 @Component
 public class Bootstrap implements CommandLineRunner {
 	

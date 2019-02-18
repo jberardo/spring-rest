@@ -7,9 +7,16 @@ import io.joca.rest.domain.Category;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * 
+ * @author Joao Berardo
+ * @since Feb. 18, 2019
+ *
+ */
 public class CategoryMapperTest {
-    public static final String NAME = "Joe";
+	
     public static final long ID = 1L;
+	public static final String NAME = "Joe";
 
     CategoryMapper categoryMapper = CategoryMapper.INSTANCE;
 
