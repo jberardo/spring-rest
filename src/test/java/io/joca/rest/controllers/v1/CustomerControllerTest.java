@@ -1,5 +1,6 @@
 package io.joca.rest.controllers.v1;
 
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -8,6 +9,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.util.Arrays;
 import java.util.List;
+
+import static org.mockito.ArgumentMatchers.anyLong;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -53,12 +56,12 @@ public class CustomerControllerTest {
     @Test
     public void testListCategories() throws Exception {
         CustomerDTO customer1 = new CustomerDTO();
-        customer1.setId(1l);
+        //customer1.setId(1l);
         customer1.setFirstname(FNAME);
         customer1.setLastname(FNAME);
 
         CustomerDTO customer2 = new CustomerDTO();
-        customer2.setId(2l);
+        //customer2.setId(2l);
         customer2.setFirstname(FNAME2);
         customer2.setLastname(FNAME2);
 
@@ -72,17 +75,18 @@ public class CustomerControllerTest {
                 .andExpect(jsonPath("$.customers", hasSize(2)));
     }
 
-//    @Test
-//    public void testGetByNameCategories() throws Exception {
-//        CategoryDTO category1 = new CategoryDTO();
-//        category1.setId(1l);
-//        category1.setName(NAME);
-//
-//        when(categoryService.getCategoryByName(anyString())).thenReturn(category1);
-//
-//        mockMvc.perform(get("/api/v1/categories/Jim")
-//                .contentType(MediaType.APPLICATION_JSON))
-//                .andExpect(status().isOk())
-//                .andExpect(jsonPath("$.name", equalTo(NAME)));
-//    }
+    @Test
+    public void testGetCustomerById() throws Exception {
+        CustomerDTO customer = new CustomerDTO();
+        customer.setFirstname(FNAME);
+        customer.setLastname(LNAME);
+
+        when(customerService.getCustomerById(anyLong())).thenReturn(customer);
+
+        mockMvc.perform(get("/api/v1/customers/123")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.firstname", equalTo(FNAME)))
+                .andExpect(jsonPath("$.lastname", equalTo(LNAME)));
+    }
 }
