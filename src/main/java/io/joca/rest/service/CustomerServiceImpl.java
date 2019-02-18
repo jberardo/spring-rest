@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 import io.joca.rest.api.v1.mapper.CustomerMapper;
+import io.joca.rest.api.v1.model.Customer;
 import io.joca.rest.api.v1.model.CustomerDTO;
 import io.joca.rest.repositories.CustomerRepository;
 
@@ -44,5 +45,19 @@ public class CustomerServiceImpl implements CustomerService {
 		return customerRepository.findById(id)
 			.map(customerMapper::customerToCustomerDTO)
 			.orElseThrow(RuntimeException::new);
+	}
+
+	@Override
+	public CustomerDTO createNewCustomer(CustomerDTO customerDTO) {
+        
+		Customer savedCustomer = customerRepository.save(
+				customerMapper.customerDtoToCustomer(customerDTO)
+		);
+        
+        CustomerDTO returnDto = customerMapper.customerToCustomerDTO(savedCustomer);
+
+        returnDto.setUrl("/api/v1/customers/" + savedCustomer.getId());
+
+        return returnDto;
 	}
 }
