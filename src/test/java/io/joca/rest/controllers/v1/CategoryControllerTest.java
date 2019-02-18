@@ -23,6 +23,12 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+/**
+ * 
+ * @author Joao Berardo
+ * @since Feb. 18, 2019
+ *
+ */
 public class CategoryControllerTest {
 
     public static final String NAME = "Jim";
@@ -75,5 +81,5 @@ public class CategoryControllerTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name", equalTo(NAME)));
-}
+    }
 }
