@@ -2,8 +2,8 @@ package io.joca.rest.api.v1.mapper;
 
 import org.junit.Test;
 
+import io.joca.rest.api.v1.model.Category;
 import io.joca.rest.api.v1.model.CategoryDTO;
-import io.joca.rest.domain.Category;
 
 import static org.junit.Assert.assertEquals;
 

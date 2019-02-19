@@ -3,9 +3,9 @@ package io.joca.rest.bootstrap;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import io.joca.rest.api.v1.model.Category;
 import io.joca.rest.api.v1.model.Customer;
 import io.joca.rest.api.v1.model.Vendor;
-import io.joca.rest.domain.Category;
 import io.joca.rest.repositories.CategoryRepository;
 import io.joca.rest.repositories.CustomerRepository;
 import io.joca.rest.repositories.VendorRepository;

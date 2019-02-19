@@ -6,8 +6,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import io.joca.rest.api.v1.mapper.CategoryMapper;
+import io.joca.rest.api.v1.model.Category;
 import io.joca.rest.api.v1.model.CategoryDTO;
-import io.joca.rest.domain.Category;
 import io.joca.rest.repositories.CategoryRepository;
 
 import java.util.Arrays;

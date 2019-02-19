@@ -2,7 +2,7 @@ package io.joca.rest.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import io.joca.rest.domain.Category;
+import io.joca.rest.api.v1.model.Category;
 
 /**
  * 

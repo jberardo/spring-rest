@@ -1,4 +1,4 @@
-package io.joca.rest.domain;
+package io.joca.rest.api.v1.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
