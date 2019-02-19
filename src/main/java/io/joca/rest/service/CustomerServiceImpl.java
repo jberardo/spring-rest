@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import io.joca.rest.api.v1.mapper.CustomerMapper;
 import io.joca.rest.api.v1.model.Customer;
 import io.joca.rest.api.v1.model.CustomerDTO;
+import io.joca.rest.controllers.v1.CustomerController;
 import io.joca.rest.repositories.CustomerRepository;
 
 /**
@@ -34,7 +35,7 @@ public class CustomerServiceImpl implements CustomerService {
 				.stream()
 				.map(customer -> {
 					CustomerDTO customerDTO = customerMapper.customerToCustomerDTO(customer);
-					customerDTO.setUrl("/api/v1/customers/" + customer.getId());
+					customerDTO.setUrl(getCustomerUrl(customer.getId()));
 					return customerDTO;
 				})
 				.collect(Collectors.toList());
@@ -45,7 +46,7 @@ public class CustomerServiceImpl implements CustomerService {
 		return customerRepository.findById(id)
 			.map(customer -> {
 				CustomerDTO customerDTO = customerMapper.customerToCustomerDTO(customer);
-				customerDTO.setUrl("/api/v1/customers/" + customer.getId());
+				customerDTO.setUrl(getCustomerUrl(customer.getId()));
 				return customerDTO;
 			})
 			.orElseThrow(RuntimeException::new);
@@ -53,16 +54,15 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public CustomerDTO createNewCustomer(CustomerDTO customerDTO) {
-        
         return saveAndReturnDTO(customerMapper.customerDtoToCustomer(customerDTO));
-	}	
+	}
 	
 	private CustomerDTO saveAndReturnDTO(Customer customer) {
-		Customer savedCustomer = customerRepository.save(customer);
-		CustomerDTO returnDto = customerMapper.customerToCustomerDTO(savedCustomer);
-		returnDto.setUrl("/api/v1/customers/" + savedCustomer.getId());
-		
-		return returnDto;
+        Customer savedCustomer = customerRepository.save(customer);
+        CustomerDTO returnDto = customerMapper.customerToCustomerDTO(savedCustomer);
+        returnDto.setUrl(getCustomerUrl(savedCustomer.getId()));
+
+        return returnDto;
 	}
 
 	@Override
@@ -86,11 +86,15 @@ public class CustomerServiceImpl implements CustomerService {
             }
             
             CustomerDTO returnDto = customerMapper.customerToCustomerDTO(customerRepository.save(customer));
-            returnDto.setUrl("/api/v1/customer/" + id);
+            returnDto.setUrl(getCustomerUrl(id));
             return returnDto;
         }).orElseThrow(RuntimeException::new); //TODO implement better exception handling;
 	}
 
+    private String getCustomerUrl(Long id) {
+        return CustomerController.BASE_URL + "/" + id;
+    }
+	
 	@Override
 	public void deleteCustomerById(Long id) {
 		customerRepository.deleteById(id);
