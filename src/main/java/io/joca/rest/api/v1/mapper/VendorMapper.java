@@ -16,4 +16,5 @@ import io.joca.rest.api.v1.model.VendorDTO;
 public interface VendorMapper {
 	VendorMapper INSTANCE = Mappers.getMapper(VendorMapper.class);
 	VendorDTO vendorToVendorDTO(Vendor vendor);
+	Vendor vendorDTOToVendor(VendorDTO vendorDTO);
 }
