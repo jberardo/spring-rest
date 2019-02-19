@@ -13,6 +13,7 @@ import io.joca.rest.api.v1.model.CustomerDTO;
 import io.joca.rest.bootstrap.Bootstrap;
 import io.joca.rest.repositories.CategoryRepository;
 import io.joca.rest.repositories.CustomerRepository;
+import io.joca.rest.repositories.VendorRepository;
 
 import java.util.List;
 
@@ -36,6 +37,9 @@ public class CustomerServiceImplIT {
 
 	    @Autowired
 	    CategoryRepository categoryRepository;
+	    
+	    @Autowired
+	    VendorRepository vendorRepository;
 
 	    CustomerService customerService;
 
@@ -45,7 +49,7 @@ public class CustomerServiceImplIT {
 	        System.out.println(customerRepository.findAll().size());
 
 	        //setup data for testing
-	        Bootstrap bootstrap = new Bootstrap(categoryRepository, customerRepository);
+	        Bootstrap bootstrap = new Bootstrap(categoryRepository, customerRepository, vendorRepository);
 	        bootstrap.run(); //load data
 
 	        customerService = new CustomerServiceImpl(customerRepository, CustomerMapper.INSTANCE);
