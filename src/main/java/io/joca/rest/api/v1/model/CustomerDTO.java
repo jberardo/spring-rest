@@ -1,8 +1,8 @@
 package io.joca.rest.api.v1.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 
@@ -11,6 +11,8 @@ import lombok.Data;
  *
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class CustomerDTO {
 	private Long id;
 	private String firstname;
