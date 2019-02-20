@@ -28,6 +28,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import io.joca.rest.api.v1.model.CustomerDTO;
 import io.joca.rest.api.v1.model.Vendor;
 import io.joca.rest.api.v1.model.VendorDTO;
+import io.joca.rest.api.v1.model.VendorListDTO;
 import io.joca.rest.service.ResourceNotFoundException;
 import io.joca.rest.service.VendorService;
 
@@ -66,7 +67,7 @@ public class VendorControllerTest extends AbstractRestControllerTest {
         VendorDTO vendor2 = new VendorDTO();
         vendor2.setName("Vendor2");
 
-        List<VendorDTO> vendors = Arrays.asList(vendor1, vendor2);
+        VendorListDTO vendors = new VendorListDTO(Arrays.asList(vendor1, vendor2));
 
         when(vendorService.getAllVendors()).thenReturn(vendors);
 

@@ -3,6 +3,7 @@ package io.joca.rest.service;
 import java.util.List;
 
 import io.joca.rest.api.v1.model.VendorDTO;
+import io.joca.rest.api.v1.model.VendorListDTO;
 
 /**
  * 
@@ -11,7 +12,7 @@ import io.joca.rest.api.v1.model.VendorDTO;
  *
  */
 public interface VendorService {
-	List<VendorDTO> getAllVendors();
+	VendorListDTO getAllVendors();
 	VendorDTO getVendorrById(Long id);
 	VendorDTO createNewVendor(VendorDTO vendorDTO);
 	VendorDTO saveVendorByDTO(Long id, VendorDTO vendorDTO);

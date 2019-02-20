@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import io.joca.rest.api.v1.mapper.VendorMapper;
 import io.joca.rest.api.v1.model.Vendor;
 import io.joca.rest.api.v1.model.VendorDTO;
+import io.joca.rest.api.v1.model.VendorListDTO;
 import io.joca.rest.controllers.v1.VendorController;
 import io.joca.rest.repositories.VendorRepository;
 
@@ -29,22 +30,22 @@ public class VendorServiceImpl implements VendorService {
 	}
 
 	@Override
-	public List<VendorDTO> getAllVendors() {
-		return vendorRepository.findAll()
+	public VendorListDTO getAllVendors() {
+		return new VendorListDTO(vendorRepository.findAll()
 				.stream()
 				.map(vendor -> {
 					VendorDTO vendorDTO = mapper.vendorToVendorDTO(vendor);
 					vendorDTO.setUrl(getVendorUrl(vendor.getId()));
 					return vendorDTO;
 				})
-				.collect(Collectors.toList());
+				.collect(Collectors.toList()));
 	}
 	
 	@Override
 	public VendorDTO getVendorrById(Long id) {
 		return vendorRepository.findById(id)
-				.map(vendor -> {
-					VendorDTO vendorDTO = mapper.vendorToVendorDTO(vendor);
+				.map(mapper::vendorToVendorDTO)
+				.map(vendorDTO -> {
 					vendorDTO.setUrl(getVendorUrl(id));
 					return vendorDTO;
 				})
@@ -53,12 +54,12 @@ public class VendorServiceImpl implements VendorService {
 
 	@Override
 	public VendorDTO createNewVendor(VendorDTO vendorDTO) {
-		return saveAndReturnDTO(mapper.vendorDTOToVendor(vendorDTO));
+		return saveAndReturnDTO(mapper.vendorDTOTVendor(vendorDTO));
 	}
 
 	@Override
 	public VendorDTO saveVendorByDTO(Long id, VendorDTO vendorDTO) {
-		Vendor vendor = mapper.vendorDTOToVendor(vendorDTO);
+		Vendor vendor = mapper.vendorDTOTVendor(vendorDTO);
 		vendor.setId(id);
 		return saveAndReturnDTO(vendor);
 	}
