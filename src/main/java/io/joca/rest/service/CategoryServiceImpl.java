@@ -20,7 +20,7 @@ import io.joca.rest.repositories.CategoryRepository;
 public class CategoryServiceImpl implements CategoryService {
 
 	private CategoryRepository categoryRepository;
-	private final CategoryMapper mapper;
+	private CategoryMapper mapper;
 	
 	public CategoryServiceImpl(CategoryRepository categoryRepository, CategoryMapper mapper) {
 		this.categoryRepository = categoryRepository;
